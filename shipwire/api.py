@@ -66,6 +66,18 @@ METHODS = {
         'create': ['POST', 'secret'],
         'get': ['GET', 'secret', ''],
         'delete': ['DELETE', 'secret', '']
+    },
+    'warehouses': {
+        'list': ['GET', 'warehouses'],
+        'create': ['POST', 'warehouses'],
+        'get': ['GET', 'warehouses', ''],
+        'delete': ['DELETE', 'warehouses', '']
+    },
+    'products': {
+        'list': ['GET', 'products'],
+        'create': ['POST', 'products'],
+        'get': ['GET', 'products', ''],
+        'delete': ['DELETE', 'products', '']
     }
 }
 
@@ -124,7 +136,7 @@ class Shipwire():
         try:
             res = requests.request(http_method, uri, auth=self.auth,
                                    params=self.call_params,
-                                   json=self.json, timeout=self.timeout)
+                                   timeout=self.timeout,)
         except requests.exceptions.Timeout as exc:
             raise TimeoutError(exc)
 
