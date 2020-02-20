@@ -24,7 +24,7 @@ METHODS = {
         'list': ['GET', 'orders']
     },
     'stock': {
-        'products': ['GET', 'stock']
+        'list': ['GET', 'stock']
     },
     'rate': {
         'quote': ['POST', 'rate']
@@ -134,9 +134,14 @@ class Shipwire():
         http_method = endpoint[0]
 
         try:
-            res = requests.request(http_method, uri, auth=self.auth,
-                                   params=self.call_params,
-                                   timeout=self.timeout,)
+            if self.json:
+                res = requests.request(http_method, uri, auth=self.auth,
+                                       params=self.call_params, json=self.json,
+                                       timeout=self.timeout,)
+            else:
+                res = requests.request(http_method, uri, auth=self.auth,
+                                       params=self.call_params,
+                                       timeout=self.timeout,)
         except requests.exceptions.Timeout as exc:
             raise TimeoutError(exc)
 
